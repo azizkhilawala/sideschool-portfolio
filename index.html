@@ -113,6 +113,7 @@
         .accent-btn:hover {
             background-color: #3bd24a;
             transform: translateY(-2px);
+            color: #000;
         }
 
         .hero {
@@ -239,8 +240,7 @@
 
         footer {
             text-align: center;
-            padding: 4rem 2rem;
-            background-color: var(--secondary-bg);
+            padding: 2rem 2rem;
         }
 
         footer p {
@@ -269,6 +269,150 @@
                 gap: 1rem;
             }
         }
+
+        .nav-links .coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .nav-links .coming-soon:hover::after {
+            content: 'Coming Soon';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        /* Add hamburger menu button styles */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile menu container */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--bg-color);
+            padding: 2rem;
+            z-index: 99;
+        }
+
+        .mobile-menu .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 100;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu .close-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-menu .accent-btn {
+            color: #000;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .mobile-menu .accent-btn:hover {
+            color: #000;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .mobile-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-menu a.coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .mobile-menu a.coming-soon:hover::after {
+            content: 'Coming Soon';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        /* Update existing media query */
+        @media (max-width: 768px) {
+            .nav-links, .accent-btn {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .header-container {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 0.5rem 1rem;
+            }
+
+            .mobile-menu .accent-btn {
+                display: inline-block;
+                margin-top: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -277,11 +421,24 @@
             <a href="#header-container" class="logo">aziz</a>
             <nav class="nav-links">
                 <a href="#challenges" class="active">Challenges</a>
+                <a href="https://www.side.school/program/ai-for-designers" target="_blank">AI Bootcamp</a>
+                <a href="#" class="coming-soon">AI Design Journey</a>
                 <a href="https://new.azizk.design/about" target="_blank">About Me</a>
             </nav>
+            <button class="mobile-menu-btn">☰</button>
             <a href="https://new.azizk.design/" class="accent-btn" target="_blank">Personal Portfolio</a>
         </div>
     </header>
+
+    <!-- Add mobile menu -->
+    <div class="mobile-menu">
+        <button class="close-btn">×</button>
+        <a href="#challenges">Challenges</a>
+        <a href="https://www.side.school/program/ai-for-designers" target="_blank">AI Bootcamp</a>
+        <a href="#" class="coming-soon">AI Design Journey</a>
+        <a href="https://new.azizk.design/about" target="_blank">About Me</a>
+        <a href="https://new.azizk.design/" class="accent-btn" target="_blank">Personal Portfolio</a>
+    </div>
 
     <section class="hero">
         <img src="Main Image.png" alt="Aziz Khilawala" class="profile-img">
@@ -550,6 +707,35 @@
                 document.querySelector('.nav-links a[href="#challenges"]').classList.add('active');
             } else {
                 document.querySelector('.nav-links a[href="#challenges"]').classList.remove('active');
+            }
+        });
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const closeMenuBtn = document.querySelector('.close-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        closeMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Add resize event listener to handle mobile menu visibility
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
     </script>

@@ -29,7 +29,7 @@ class AutoReloadHandler(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == '/':
-            self.path = '/portfolio-website.html'
+            self.path = '/index.html'
         return super().do_GET()
 
     def send_response(self, code, message=None):
