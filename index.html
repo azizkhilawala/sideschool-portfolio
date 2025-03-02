@@ -3,18 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aziz Khilawala - Side School Portfolio</title>
+    <meta name="description" content="Aziz Khilawala's Side School Portfolio - Showcasing AI for Designers Bootcamp projects and challenges">
+    <meta name="keywords" content="AI Design, UX Design, Side School, Portfolio, Aziz Khilawala">
+    <meta name="author" content="Aziz Khilawala">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sideschool-portfolio.pages.dev/">
+    <meta property="og:title" content="Aziz Khilawala - Side School Portfolio">
+    <meta property="og:description" content="Explore my journey through the AI for Designers Bootcamp at Side School">
+    <meta property="og:image" content="Main Image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sideschool-portfolio.pages.dev/">
+    <meta property="twitter:title" content="Aziz Khilawala - Side School Portfolio">
+    <meta property="twitter:description" content="Explore my journey through the AI for Designers Bootcamp at Side School">
+    <meta property="twitter:image" content="Main Image.png">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="Main Image.png" as="image">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" as="style">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    
     <!-- Plausible Analytics -->
     <script defer data-domain="sideschool-portfolio.pages.dev" src="https://plausible.io/js/script.hash.js"></script>
+
+    <!-- Critical CSS -->
     <style>
         :root {
             --bg-color: #0a0d14;
@@ -198,9 +223,491 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 3; /* Make sure this is higher than the overlay */
+            z-index: 3;
             opacity: 0;
             text-indent: -9999px;
+            outline: none;
+        }
+
+        .challenge-link:focus {
+            opacity: 1;
+            text-indent: 0;
+            background: rgba(77, 235, 92, 0.8);
+            outline: 3px solid var(--accent-color);
+            outline-offset: -3px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            font-weight: 500;
+        }
+
+        .challenge-link:focus ~ .hover-overlay {
+            opacity: 1;
+        }
+
+        .challenge-card-container {
+            position: relative;
+        }
+
+        .hover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(77, 235, 92, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+            pointer-events: none;
+            border-radius: 12px;
+        }
+
+        .challenge-card-container:hover .hover-overlay {
+            opacity: 1;
+        }
+
+        .view-project {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 2rem;
+        }
+
+        footer p {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            .challenges-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+
+        .nav-links .coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .nav-links .coming-soon:hover::after {
+            content: 'Coming Soon';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        /* Add hamburger menu button styles */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile menu container */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--bg-color);
+            padding: 2rem;
+            z-index: 99;
+        }
+
+        .mobile-menu .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 100;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu .close-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-menu .accent-btn {
+            color: #000;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .mobile-menu .accent-btn:hover {
+            color: #000;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .mobile-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-menu a.coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .mobile-menu a.coming-soon:hover::after {
+            content: 'Coming Soon';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        /* Update existing media query */
+        @media (max-width: 768px) {
+            .nav-links, .accent-btn {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .header-container {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 0.5rem 1rem;
+            }
+
+            .mobile-menu .accent-btn {
+                display: inline-block;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Add focus styles for other interactive elements */
+        .nav-links a:focus,
+        .mobile-menu a:focus,
+        .accent-btn:focus,
+        .mobile-menu-btn:focus,
+        .close-btn:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
+        /* Ensure focus is only visible when using keyboard */
+        :focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
+        .challenge-link:focus:not(:focus-visible) {
+            opacity: 0;
+            text-indent: -9999px;
+            outline: none;
+            background: none;
+        }
+
+        .challenge-link:focus-visible {
+            opacity: 1;
+            text-indent: 0;
+            background: rgba(77, 235, 92, 0.8);
+            outline: 3px solid var(--accent-color);
+            outline-offset: -3px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            font-weight: 500;
+        }
+    </style>
+
+    <!-- Non-critical CSS -->
+    <style media="print" onload="this.media='all'">
+        :root {
+            --bg-color: #0a0d14;
+            --card-bg: #16181f;
+            --text-color: #ffffff;
+            --accent-color: #4deb5c;
+            --secondary-bg: #111318;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: rgba(10, 13, 20, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--accent-color);
+        }
+
+        .logo a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo a:hover {
+            
+            color: var(--accent-color);
+        }
+        
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links .active {
+            color: var(--accent-color);
+            position: relative;
+        }
+
+        .accent-btn {
+            background-color: var(--accent-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .accent-btn:hover {
+            background-color: #3bd24a;
+            transform: translateY(-2px);
+            color: #000;
+        }
+
+        .hero {
+            padding: 10rem 2rem 5rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h3 {
+            color: #888;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            opacity: 0.7;
+            margin-bottom: 3rem;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 2rem;
+            display: block;
+        }
+
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .challenge-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .challenge-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .challenge-info {
+            padding: 1.5rem;
+        }
+
+        .challenge-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .challenge-info p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .challenge-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            opacity: 0;
+            text-indent: -9999px;
+            outline: none;
+        }
+
+        .challenge-link:focus {
+            opacity: 1;
+            text-indent: 0;
+            background: rgba(77, 235, 92, 0.8);
+            outline: 3px solid var(--accent-color);
+            outline-offset: -3px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            font-weight: 500;
+        }
+
+        .challenge-link:focus ~ .hover-overlay {
+            opacity: 1;
         }
 
         .challenge-card-container {
@@ -418,21 +925,21 @@
 <body>
     <header>
         <div id="header-container" class="header-container">
-            <a href="#header-container" class="logo">aziz</a>
-            <nav class="nav-links">
+            <a href="#header-container" class="logo" aria-label="Go to top">aziz</a>
+            <nav class="nav-links" role="navigation" aria-label="Main navigation">
                 <a href="#challenges" class="active">Challenges</a>
                 <a href="https://www.side.school/program/ai-for-designers" target="_blank">AI Bootcamp</a>
                 <a href="#" class="coming-soon">AI Design Journey</a>
                 <a href="https://new.azizk.design/about" target="_blank">About Me</a>
             </nav>
-            <button class="mobile-menu-btn">☰</button>
+            <button class="mobile-menu-btn" aria-label="Open mobile menu" aria-expanded="false">☰</button>
             <a href="https://new.azizk.design/" class="accent-btn" target="_blank">Personal Portfolio</a>
         </div>
     </header>
 
     <!-- Add mobile menu -->
-    <div class="mobile-menu">
-        <button class="close-btn">×</button>
+    <div class="mobile-menu" role="dialog" aria-label="Mobile menu">
+        <button class="close-btn" aria-label="Close mobile menu">×</button>
         <a href="#challenges">Challenges</a>
         <a href="https://www.side.school/program/ai-for-designers" target="_blank">AI Bootcamp</a>
         <a href="#" class="coming-soon">AI Design Journey</a>
@@ -441,7 +948,7 @@
     </div>
 
     <section class="hero">
-        <img src="Main Image.png" alt="Aziz Khilawala" class="profile-img">
+        <img src="Main Image.png" alt="Aziz Khilawala" class="profile-img" fetchpriority="high">
         <h3>Aziz Khilawala's</h3>
         <h1>Side School Portfolio</h1>
         <h2>AI for Designers Bootcamp</h2>
@@ -452,7 +959,7 @@
         <!-- Challenge 1 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 1.png" alt="Project Perfect" class="challenge-img">
+                <img src="Challenge 1.png" alt="Project Perfect" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 1</h3>
                     <p>Project Perfect: Better scope your projects with your own GPT</p>
@@ -467,7 +974,7 @@
         <!-- Challenge 2 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 2.png" alt="Pitch Perfect" class="challenge-img">
+                <img src="Challenge 2.png" alt="Pitch Perfect" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 2</h3>
                     <p>Pitch Perfect: Get to winning pitches faster with AI feedback & presentations</p>
@@ -482,7 +989,7 @@
         <!-- Challenge 3 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 3.png" alt="Space Explorer" class="challenge-img">
+                <img src="Challenge 3.png" alt="Space Explorer" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 3</h3>
                     <p>Space Explorer: Explore visual concepts faster than ever</p>
@@ -497,7 +1004,7 @@
         <!-- Challenge 4 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 4.png" alt="Inpainter" class="challenge-img">
+                <img src="Challenge 4.png" alt="Inpainter" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 4</h3>
                     <p>Inpainter: Nail down design details with more control on AI generations</p>
@@ -512,7 +1019,7 @@
         <!-- Challenge 5 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 5.png" alt="My Style" class="challenge-img">
+                <img src="Challenge 5.png" alt="My Style" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 5</h3>
                     <p>My Style: Train AI models to match your unique brand aesthetic</p>
@@ -527,7 +1034,7 @@
         <!-- Challenge 6 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 6.png" alt="Demiurge" class="challenge-img">
+                <img src="Challenge 6.png" alt="Demiurge" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 6</h3>
                     <p>Demiurge: Create lifelike videos to animate your designs with AI</p>
@@ -542,7 +1049,7 @@
         <!-- Challenge 7 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 7.png" alt="Everything Designer" class="challenge-img">
+                <img src="Challenge 7.png" alt="Everything Designer" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 7</h3>
                     <p>Everything Designer: Prompt AI for royalty free music and sound effects</p>
@@ -557,7 +1064,7 @@
         <!-- Challenge 8 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 8.png" alt="Visual Factory" class="challenge-img">
+                <img src="Challenge 8.png" alt="Visual Factory" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 8</h3>
                     <p>Visual Factory: Easily duplicate and manage hundreds of ad creatives variants with AI</p>
@@ -572,7 +1079,7 @@
         <!-- Challenge 9 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 9.png" alt="Figma Ninja" class="challenge-img">
+                <img src="Challenge 9.png" alt="Figma Ninja" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 9</h3>
                     <p>Figma Ninja: Combine workflows to redesign a web page super fast</p>
@@ -587,7 +1094,7 @@
         <!-- Challenge 10 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 10.png" alt="Prompt Machine" class="challenge-img">
+                <img src="Challenge 10.png" alt="Prompt Machine" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 10</h3>
                     <p>Prompt Machine: Generate writing ideas faster with prompt chaining</p>
@@ -602,7 +1109,7 @@
         <!-- Challenge 11 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 11.png" alt="Profiler" class="challenge-img">
+                <img src="Challenge 11.png" alt="Profiler" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 11</h3>
                     <p>Profiler: Automatically generate accurate profiles of your past and potential clients</p>
@@ -617,7 +1124,7 @@
         <!-- Challenge 12 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 12.png" alt="Simulated Feedback" class="challenge-img">
+                <img src="Challenge 12.png" alt="Simulated Feedback" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 12</h3>
                     <p>Simulated Feedback: Iterate on your design concepts with AI-powered feedback</p>
@@ -632,7 +1139,7 @@
         <!-- Challenge 13 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 13.png" alt="Unicorn Designer" class="challenge-img">
+                <img src="Challenge 13.png" alt="Unicorn Designer" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 13</h3>
                     <p>Unicorn Designer: Generate working prototypes of your designs to align your team</p>
@@ -647,7 +1154,7 @@
         <!-- Challenge 14 -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 14.png" alt="Automator" class="challenge-img">
+                <img src="Challenge 14.png" alt="Automator" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 14</h3>
                     <p>Automator: Automate design workflows and parts of project management with AI</p>
@@ -662,7 +1169,7 @@
         <!-- Challenge 15 (Current website) -->
         <div class="challenge-card-container">
             <div class="challenge-card">
-                <img src="Challenge 15.png" alt="Ta-da!" class="challenge-img">
+                <img src="Challenge 15.png" alt="Ta-da!" class="challenge-img" loading="lazy">
                 <div class="challenge-info">
                     <h3>Challenge 15</h3>
                     <p>Ta-da!: Bring all your AI generations into one shareable website, made with no-code</p>
@@ -717,8 +1224,36 @@
         const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
 
         function toggleMobileMenu() {
-            mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            const isOpen = mobileMenu.classList.toggle('active');
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+            mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+            
+            if (isOpen) {
+                closeMenuBtn.focus();
+                // Trap focus within mobile menu
+                const focusableElements = mobileMenu.querySelectorAll('a[href], button');
+                const firstFocusable = focusableElements[0];
+                const lastFocusable = focusableElements[focusableElements.length - 1];
+
+                mobileMenu.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        toggleMobileMenu();
+                    }
+                    if (e.key === 'Tab') {
+                        if (e.shiftKey) {
+                            if (document.activeElement === firstFocusable) {
+                                e.preventDefault();
+                                lastFocusable.focus();
+                            }
+                        } else {
+                            if (document.activeElement === lastFocusable) {
+                                e.preventDefault();
+                                firstFocusable.focus();
+                            }
+                        }
+                    }
+                });
+            }
         }
 
         mobileMenuBtn.addEventListener('click', toggleMobileMenu);
